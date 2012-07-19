@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	template="loginTemplate.xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+        Twitample :: Login
+    </ui:define>
+
+	<ui:define name="content">
+
+		<table>
+			<tr>
+				<td><!--<rich:messages styleClass="errorMessage" />--></td>
+			</tr>
+		</table>
+		<br />
+		 <p:panel header="Login to Twitample" style="width: 700;">
+			<h:form>
+				<table>
+					<tr>
+						<td><h:outputText value="User Name:" /></td>
+						<td><p:inputText size="20" value="#{loginBean.webServiceURL}" required="true" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Password:" /></td>
+						<td><p:inputText size="20"
+							value="#{loginBean.persistenceUnits}" required="true" /></td>
+					</tr>
+					
+					<tr>
+						<td></td>
+						<td><p:commandButton value="Submit"
+							action="#{loginBean.authenticate}" /></td>
+
+					</tr>
+				</table>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+	 <!-- Struts Spring Configuration -->
+	 <constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+	 
+	 <!--  Action/Package mappings. -->
+
+	<package name="register" namespace="/pages" extends="struts-default">
+		<action name="save" class="PersistenceAction" method="execute">
+			<result name="success">/pages/profile.jsp</result>
+		</action>
+                 <action name="find" class="FindByEMailAction" method="find">
+			<result name="success">/pages/search.jsp</result>
+			<result name="failure">/pages/findByEmail.jsp</result>
+		</action>			
+   </package>
+
+
+</struts>
