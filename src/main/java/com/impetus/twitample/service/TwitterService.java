@@ -18,7 +18,6 @@ package com.impetus.twitample.service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
@@ -36,57 +35,14 @@ import com.impetus.twitample.entities.User;
  * 
  * @author amresh.singh
  */
+
+@Transactional(propagation = Propagation.REQUIRED)
 public class TwitterService extends SuperDao implements Twitter
 {
     @PersistenceContext(unitName="twitample_cassandra", type=PersistenceContextType.EXTENDED)
-    private EntityManager em;
+    private EntityManager em;   
 
-    private EntityManagerFactory emf;
-
-    public TwitterService(String persistenceUnitName)
-    {
-        if (emf == null)
-        {
-            try
-            {
-                emf = createEntityManagerFactory(persistenceUnitName);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    @Override
-    public void createEntityManager()
-    {
-        if (em == null)
-        {
-            em = emf.createEntityManager();
-        }
-    }
-
-    @Override
-    public void closeEntityManager()
-    {
-        if (em != null)
-        {
-            em.close();
-            em = null;
-        }
-    }
-
-    @Override
-    public void close()
-    {
-        if (emf != null)
-        {
-            emf.close();
-        }
-    }
-
+   
     @Override
     public void addUser(User user)
     {
@@ -141,6 +97,7 @@ public class TwitterService extends SuperDao implements Twitter
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void addFollower(String userId, String followerUserId)
     {
         User user = em.find(User.class, userId);
@@ -159,6 +116,7 @@ public class TwitterService extends SuperDao implements Twitter
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void removeUser(User user)
     {
         em.remove(user);

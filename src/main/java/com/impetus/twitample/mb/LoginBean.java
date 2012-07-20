@@ -17,16 +17,18 @@ package com.impetus.twitample.mb;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.impetus.twitample.Constants;
 import com.impetus.twitample.entities.User;
 import com.impetus.twitample.service.Twitter;
-import com.impetus.twitample.service.TwitterService;
 
 
 
@@ -41,7 +43,9 @@ import com.impetus.twitample.service.TwitterService;
 public class LoginBean
 {
     private String userName;
-    private String password;
+    private String password;   
+    
+    Twitter twitter;
     
     public String authenticate()
     {
@@ -67,12 +71,11 @@ public class LoginBean
             return outcome;
         }
         else
-        {  
-            Twitter twitter = new TwitterService(Constants.PERSISTENCE_UNIT);
+        {   
+            BeanFactory beanfactory = new ClassPathXmlApplicationContext("appContext.xml");
+            twitter = (Twitter) beanfactory.getBean("twitter");            
             
-            twitter.createEntityManager();
-            User user = twitter.findUserById(getUserName());
-            twitter.closeEntityManager();
+            User user = twitter.findUserById(getUserName());            
             
             if(user == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Incorrect User Name"));
@@ -89,7 +92,7 @@ public class LoginBean
                 outcome = Constants.OUTCOME_LOGIN_SUCCESSFUL;
             }      
             
-            session.setAttribute("service", twitter);
+            session.setAttribute("twitter", twitter);
             return outcome;
         }
     }
@@ -124,6 +127,23 @@ public class LoginBean
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    /**
+     * @return the twitter
+     */
+    public Twitter getTwitter()
+    {
+        return twitter;
+    }
+
+    /**
+     * @param twitter the twitter to set
+     */
+    public void setTwitter(Twitter twitter)
+    {
+        this.twitter = twitter;
     }  
+    
 
 }

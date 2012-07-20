@@ -132,16 +132,6 @@ public interface Twitter
      *            the device name
      * @return the list
      */
-    List<Tweet> findTweetByDevice(String deviceName);
-
-    /**
-     * Close.
-     */
-    void close();
-    
-    void createEntityManager();
-    
-    void closeEntityManager(); 
-    
+    List<Tweet> findTweetByDevice(String deviceName);   
 
 }
