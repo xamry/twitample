@@ -1,0 +1,8 @@
+drop keyspace twitample;
+create keyspace twitample;
+use twitample;
+create column family USER with column_type=Super and comparator=UTF8Type and default_validation_class=UTF8Type and key_validation_class=UTF8Type;
+create column family USER_INDEX with comparator=UTF8Type and default_validation_class=UTF8Type and key_validation_class=UTF8Type;
+create column family PREFERENCE;
+create column family EXTERNAL_LINK with comparator=UTF8Type and default_validation_class=UTF8Type and key_validation_class=UTF8Type and column_metadata=[{column_name: USER_ID, validation_class:UTF8Type, index_type: KEYS}];
+describe twitample;

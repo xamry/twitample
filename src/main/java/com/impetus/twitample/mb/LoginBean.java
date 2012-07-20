@@ -69,7 +69,11 @@ public class LoginBean
         else
         {  
             Twitter twitter = new TwitterService(Constants.PERSISTENCE_UNIT);
+            
+            twitter.createEntityManager();
             User user = twitter.findUserById(getUserName());
+            twitter.closeEntityManager();
+            
             if(user == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Incorrect User Name"));
                 outcome = Constants.OUTCOME_LOGIN_FAILED;
@@ -83,7 +87,9 @@ public class LoginBean
                 return outcome;
             } else {
                 outcome = Constants.OUTCOME_LOGIN_SUCCESSFUL;
-            }            
+            }      
+            
+            session.setAttribute("service", twitter);
             return outcome;
         }
     }

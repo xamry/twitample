@@ -18,7 +18,7 @@ package com.impetus.twitample.entities;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import com.impetus.client.twitter.utils.ExampleUtils;
+import com.impetus.twitample.TwitampleUtils;
 
 /**
  * Class for Tweets
@@ -43,7 +43,7 @@ public class Tweet
 
     public Tweet(String body, String device)
     {
-        this.tweetId = ExampleUtils.getUniqueId();
+        this.tweetId = TwitampleUtils.getUniqueId();
         this.body = body;
         this.device = device;
         // this.timestamp = ExampleUtils.getCurrentTimestamp();

@@ -11,7 +11,7 @@
 
 		<table>
 			<tr>
-				<td><!--<rich:messages styleClass="errorMessage" />--></td>
+				<td><p:growl id="growl" sticky="false" showDetail="false"/> </td>
 			</tr>
 		</table>
 		<br />
@@ -20,17 +20,17 @@
 				<table>
 					<tr>
 						<td><h:outputText value="User Name:" /></td>
-						<td><p:inputText size="20" value="#{loginBean.webServiceURL}" required="true" /></td>
+						<td><p:inputText size="20" value="#{loginBean.userName}" required="true" label="User Name"  /></td>
 					</tr>
 					<tr>
 						<td><h:outputText value="Password:" /></td>
 						<td><p:inputText size="20"
-							value="#{loginBean.persistenceUnits}" required="true" /></td>
+							value="#{loginBean.password}" required="true" label="Password"  /></td>
 					</tr>
 					
 					<tr>
 						<td></td>
-						<td><p:commandButton value="Submit"
+						<td><h:commandButton value="Submit"
 							action="#{loginBean.authenticate}" /></td>
 
 					</tr>

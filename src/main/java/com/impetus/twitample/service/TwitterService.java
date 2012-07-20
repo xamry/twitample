@@ -19,7 +19,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
+
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.impetus.twitample.entities.ExternalLink;
 import com.impetus.twitample.entities.Preference;
@@ -33,6 +38,7 @@ import com.impetus.twitample.entities.User;
  */
 public class TwitterService extends SuperDao implements Twitter
 {
+    @PersistenceContext(unitName="twitample_cassandra", type=PersistenceContextType.EXTENDED)
     private EntityManager em;
 
     private EntityManagerFactory emf;
@@ -145,6 +151,7 @@ public class TwitterService extends SuperDao implements Twitter
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public User findUserById(String userId)
     {
         User user = em.find(User.class, userId);

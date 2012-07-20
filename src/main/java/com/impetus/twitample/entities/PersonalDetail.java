@@ -18,7 +18,7 @@ package com.impetus.twitample.entities;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import com.impetus.client.twitter.utils.ExampleUtils;
+import com.impetus.twitample.TwitampleUtils;
 
 /**
  * Entity class for user's personal details
@@ -48,7 +48,7 @@ public class PersonalDetail
 
     public PersonalDetail(String name, String password, String relationshipStatus)
     {
-        setPersonalDetailId(ExampleUtils.getUniqueId());
+        setPersonalDetailId(TwitampleUtils.getUniqueId());
         setName(name);
         setPassword(password);
         setRelationshipStatus(relationshipStatus);
