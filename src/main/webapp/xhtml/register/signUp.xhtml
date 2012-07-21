@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	template="signUpTemplate.xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+        Twitample :: SignUp
+    </ui:define>
+
+	<ui:define name="content">
+
+		<table>
+			<tr>
+				<td><p:growl id="growl" sticky="false" showDetail="false" /></td>
+			</tr>
+		</table>
+		<br />
+		<p:panel header="SignUp to Twitample">
+			<h:form>
+
+				<p:growl id="growl" sticky="true" showDetail="true" />
+
+				<p:wizard widgetVar="wiz" flowListener="#{registerBean.onFlowProcess}">
+					<p:tab id="personal" title="Personal">
+
+						<p:panel header="Personal Details">
+
+							<h:messages errorClass="error" />
+
+							<h:panelGrid columns="2" columnClasses="label, value"
+								styleClass="grid">
+								<h:outputText value="User ID: *" />
+								<p:inputText required="true" label="User ID"
+									value="#{registerBean.user.userId}" />
+
+								<h:outputText value="Full Name *" />
+								<p:inputText required="true" label="Full Name"
+									value="#{registerBean.user.personalDetail.name}" />
+									
+								<h:outputText value="Password *" />
+								<p:inputText required="true" label="Password"
+									value="#{registerBean.user.personalDetail.password}" />								
+
+								<h:outputText value="Skip to last: " />
+								<h:selectBooleanCheckbox value="#{registerBean.skip}" />
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
+
+					<p:tab id="preference" title="Preference">
+						<p:panel header="Your website preference">
+
+							<h:messages errorClass="error" />
+
+							<h:panelGrid columns="2" columnClasses="label, value">
+								<h:outputText value="Website Theme: " />
+								<p:inputText value="#{registerBean.user.preference.websiteTheme}" />
+
+								<h:outputText value="Privacy Level: " />
+								<p:inputText value="#{registerBean.user.preference.privacyLevel}" />								
+
+								<h:outputText value="Skip to last: " />
+								<h:selectBooleanCheckbox value="#{registerBean.skip}" />
+							</h:panelGrid>
+							
+							<p:commandButton value="Submit" update="growl"   
+                            action="#{registerBean.save}"/> 
+                            
+						</p:panel>
+					</p:tab>
+
+				</p:wizard>
+
+			</h:form>
+
+		</p:panel>
+	</ui:define>
+</ui:composition>

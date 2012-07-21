@@ -24,6 +24,13 @@ public class Constants
     public static final String OUTCOME_LOGIN_FAILED = "loginFailed";
     public static final String OUTCOME_LOGIN_SUCCESSFUL = "loginSuccessful";
     
+    public static final String OUTCOME_SIGNUP_SUCCESSFUL = "signUpSuccessful";
+    public static final String OUTCOME_TIMELINE = "timeline";    
+    
     public static final String PERSISTENCE_UNIT = "twitample_cassandra";
+    
+    public static final String USER_ID = "userId";
 
+    public static final String TWEET_DEVICE_WEB = "Web";
+    
 }

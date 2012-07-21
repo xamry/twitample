@@ -18,6 +18,14 @@ package com.impetus.twitample;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.impetus.twitample.service.Twitter;
+
 /**
  * <Prove description of functionality provided by this Type> 
  * @author amresh.singh
@@ -32,6 +40,17 @@ public class TwitampleUtils
     public static long getCurrentTimestamp()
     {
         return new Date().getTime();
+    }
+    
+    public static Twitter getTwitterService() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        Twitter twitter = (Twitter)session.getAttribute("twitter"); 
+        if(twitter == null) {
+            BeanFactory beanfactory = new ClassPathXmlApplicationContext("appContext.xml");
+            twitter = (Twitter) beanfactory.getBean("twitter");
+            session.setAttribute("twitter", twitter);
+        }
+        return twitter;
     }
 
 }

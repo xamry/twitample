@@ -8,11 +8,23 @@
 		<from-view-id>/xhtml/login/login.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>loginSuccessful</from-outcome>
-			<to-view-id>/xhtml/home/home.xhtml</to-view-id>
+			<to-view-id>/xhtml/home/timeline.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>loginFailed</from-outcome>
 			<to-view-id>/xhtml/login/login.xhtml</to-view-id>
-		</navigation-case>
+		</navigation-case>			
+	</navigation-rule>
+	
+	<navigation-rule>		
+		<navigation-case>
+			<from-outcome>signUpSuccessful</from-outcome>
+			<to-view-id>/xhtml/login/login.xhtml</to-view-id>
+		</navigation-case>	
+		<navigation-case>
+			<from-outcome>timeline</from-outcome>
+			<to-view-id>/xhtml/home/timeline.xhtml</to-view-id>
+		</navigation-case>	
+			
 	</navigation-rule>
 </faces-config>

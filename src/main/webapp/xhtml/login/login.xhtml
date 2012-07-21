@@ -15,23 +15,27 @@
 			</tr>
 		</table>
 		<br />
-		 <p:panel header="Login to Twitample" style="width: 700;">
+		 <p:panel header="Login to Twitample">
 			<h:form>
 				<table>
 					<tr>
 						<td><h:outputText value="User Name:" /></td>
-						<td><p:inputText size="20" value="#{loginBean.userName}" required="true" label="User Name"  /></td>
+						<td><p:inputText size="20" value="#{loginBean.userName}" /></td>
 					</tr>
 					<tr>
 						<td><h:outputText value="Password:" /></td>
 						<td><p:inputText size="20"
-							value="#{loginBean.password}" required="true" label="Password"  /></td>
+							value="#{loginBean.password}" /></td>
 					</tr>
 					
-					<tr>
-						<td></td>
-						<td><h:commandButton value="Submit"
+					<tr>						
+						<td colspan="2" align="right"><h:commandButton value="Submit"
 							action="#{loginBean.authenticate}" /></td>
+
+					</tr>
+					<tr>						
+						<td colspan="2" align="right">Not a member? <h:commandLink value="SignUp Now!"
+							action="/xhtml/register/signUp.xhtml" /></td>
 
 					</tr>
 				</table>
@@ -39,5 +43,4 @@
 		</p:panel>
 	</ui:define>
 </ui:composition>
-
 

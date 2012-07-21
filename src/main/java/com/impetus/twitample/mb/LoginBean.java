@@ -27,6 +27,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.impetus.twitample.Constants;
+import com.impetus.twitample.TwitampleUtils;
 import com.impetus.twitample.entities.User;
 import com.impetus.twitample.service.Twitter;
 
@@ -51,7 +52,7 @@ public class LoginBean
     {
         String outcome = null;
 
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        
 
         // Validates Parameters
         if (StringUtils.isBlank(getUserName()))
@@ -72,8 +73,7 @@ public class LoginBean
         }
         else
         {   
-            BeanFactory beanfactory = new ClassPathXmlApplicationContext("appContext.xml");
-            twitter = (Twitter) beanfactory.getBean("twitter");            
+            setTwitter(TwitampleUtils.getTwitterService());                       
             
             User user = twitter.findUserById(getUserName());            
             
@@ -92,7 +92,9 @@ public class LoginBean
                 outcome = Constants.OUTCOME_LOGIN_SUCCESSFUL;
             }      
             
-            session.setAttribute("twitter", twitter);
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            session.setAttribute(Constants.USER_ID, getUserName());
+            
             return outcome;
         }
     }
