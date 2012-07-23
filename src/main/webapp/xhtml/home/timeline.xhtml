@@ -1,5 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	template="timelineTemplate.xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	template="timelineTemplate.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
@@ -7,25 +8,47 @@
         Twitample :: Home
     </ui:define>
 
-	<ui:define name="content">
+	<ui:define name="content">	
+		<p:panel header="Your Timeline">
 
-		<table>
-			<tr>
-				<td><p:growl id="growl" sticky="false" showDetail="false"/> </td>
-			</tr>
-		</table>
-		<br />
-		 <p:panel header="Your Timeline">
-	     <h:form>
-	     <table width="100%">
-	     	<tr>
-	     		<td><h:outputText value="Tweet: " /></td>
-	     		<td><p:inputText value="#{timelineBean.tweetBody}" /></td>
-	     		<td><h:commandButton value="Submit" action="#{timelineBean.saveTweet}"/> </td>	     		
-	     	</tr>
-	     
-	     </table>	
-	     </h:form>	
+			<table width="100%">
+				<tr>
+					<h:form>
+						<td><h:outputText value="Tweet: " /></td>
+						<td><p:inputTextarea rows="3" cols="80" counter="counter"
+							maxlength="100" counterTemplate="{0} characters remaining."
+							autoResize="false" value="#{timelineBean.tweetBody}" /><br />
+						<h:outputText id="counter" /></td>
+						<td><h:commandButton value="Submit"
+							action="#{timelineBean.saveTweet}" /></td>
+					</h:form>
+				</tr>
+
+				<tr>
+					<table width="100%"><tr>					
+					<td style="align:center;">
+					<h:form>						
+						<p:dataTable id="dataTable" var="tweet"
+							value="#{timelineBean.tweetList}">						
+
+							<p:column id="nameColumn" headerText="Name" style="width:200px;align:center;">
+								<h:outputText value="#{tweet.name}" />
+							</p:column>
+
+							<p:column id="bodyColumn" headerText="Tweet Text" style="width:400px;align:center;">
+								<h:outputText value="#{tweet.body}" />
+							</p:column>
+
+							<p:column id="deviceColumn" headerText="Device" style="width:100px;align:center;">
+								<h:outputText value="#{tweet.device}" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+					</td></tr></table>
+				</tr>
+
+			</table>
+
 		</p:panel>
 	</ui:define>
 </ui:composition>

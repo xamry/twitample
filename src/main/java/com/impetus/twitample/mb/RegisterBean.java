@@ -19,11 +19,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.FlowEvent;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.impetus.twitample.TwitampleUtils;
 import com.impetus.twitample.entities.PersonalDetail;
@@ -46,7 +43,9 @@ public class RegisterBean
     public RegisterBean() {
         user = new User();
         user.setPersonalDetail(new PersonalDetail());
-        user.setPreference(new Preference());
+        Preference pref = new Preference();
+        pref.setPreferenceId(TwitampleUtils.getUniqueId());
+        user.setPreference(pref);
     }
     
     private User user = new User();

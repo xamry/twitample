@@ -48,6 +48,27 @@ public class LoginBean
     
     Twitter twitter;
     
+    public String logOff() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("You have successfully Logged off"));
+        session.invalidate();
+        return Constants.OUTCOME_SIGNUP_SUCCESSFUL;
+    }
+    
+    public String deleteAccount() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        setTwitter(TwitampleUtils.getTwitterService());
+        String userId = (String)session.getAttribute(Constants.USER_ID);
+        
+        User user = getTwitter().findUserById(userId);
+        
+        getTwitter().removeUser(user);
+        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Account successfully deleted"));
+        session.invalidate();
+        return Constants.OUTCOME_SIGNUP_SUCCESSFUL;
+    }
+    
     public String authenticate()
     {
         String outcome = null;
