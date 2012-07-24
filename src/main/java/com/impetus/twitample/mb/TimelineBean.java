@@ -170,12 +170,12 @@ public class TimelineBean
                 if(tweets != null) {
                     
                     for(Tweet tweet : tweets) {
-                        if(tweet != null && tweet.getBody() != null && tweet.getBody().indexOf(getSearchCriteriaBody()) > 0) {
+                        if(tweet != null && tweet.getBody() != null) {
                             TweetRow tr = new TweetRow();
                             tr.setId(tweet.getTweetId());
                             tr.setBody(tweet.getBody());
                             tr.setDevice(tweet.getDevice());
-                            tr.setName(user.getPersonalDetail().getName());
+                            tr.setName(userId);
                             
                             tweetList.add(tr);
                         }
