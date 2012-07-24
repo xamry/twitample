@@ -49,6 +49,8 @@ public class TimelineBean
     private List<TweetRow> tweetList;  
     private TweetRow selectedTweet;
     
+    private String searchCriteriaBody;
+    
     
     private List<User> allUsers;
 
@@ -99,8 +101,24 @@ public class TimelineBean
     public void setSelectedTweet(TweetRow selectedTweet)
     {
         this.selectedTweet = selectedTweet;
-    }   
+    }  
     
+
+    /**
+     * @return the searchCriteriaBody
+     */
+    public String getSearchCriteriaBody()
+    {
+        return searchCriteriaBody;
+    }
+
+    /**
+     * @param searchCriteriaBody the searchCriteriaBody to set
+     */
+    public void setSearchCriteriaBody(String searchCriteriaBody)
+    {
+        this.searchCriteriaBody = searchCriteriaBody;
+    }
 
     /**
      * @return the allUsers
@@ -136,25 +154,57 @@ public class TimelineBean
         
         tweetList = new ArrayList<TweetRow>();
         
-        
-        //Get all tweets for this user
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        setTwitter(TwitampleUtils.getTwitterService());
-        String userId = (String)session.getAttribute(Constants.USER_ID);
-        
-        //Find user and update tweet list       
-        User user = getTwitter().findUserById(userId);
-        if(user.getTweets() != null) {
-            for(Tweet tweet : user.getTweets()) {
-                TweetRow tr = new TweetRow();
-                tr.setId(tweet.getTweetId());
-                tr.setName(user.getPersonalDetail().getName());
-                tr.setBody(tweet.getBody());
-                tr.setDevice(tweet.getDevice());
-                
-                tweetList.add(tr);
+        if(StringUtils.isNotEmpty(getSearchCriteriaBody())) {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            setTwitter(TwitampleUtils.getTwitterService());
+            String userId = (String)session.getAttribute(Constants.USER_ID);
+            
+            List users = getTwitter().findTweetByBody(getSearchCriteriaBody());
+            
+            if(users == null || users.isEmpty()) {
+                return tweetList;
             }
-        }        
+            
+            for(User user : (List<User>)users) {
+                List<Tweet> tweets = user.getTweets();
+                if(tweets != null) {
+                    
+                    for(Tweet tweet : tweets) {
+                        if(tweet != null && tweet.getBody() != null && tweet.getBody().indexOf(getSearchCriteriaBody()) > 0) {
+                            TweetRow tr = new TweetRow();
+                            tr.setId(tweet.getTweetId());
+                            tr.setBody(tweet.getBody());
+                            tr.setDevice(tweet.getDevice());
+                            tr.setName(user.getPersonalDetail().getName());
+                            
+                            tweetList.add(tr);
+                        }
+                    }      
+                    
+                }
+            }
+            
+              
+        } else {
+          //Get all tweets for this user
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            setTwitter(TwitampleUtils.getTwitterService());
+            String userId = (String)session.getAttribute(Constants.USER_ID);
+            
+            //Find user and update tweet list       
+            User user = getTwitter().findUserById(userId);
+            if(user.getTweets() != null) {
+                for(Tweet tweet : user.getTweets()) {
+                    TweetRow tr = new TweetRow();
+                    tr.setId(tweet.getTweetId());
+                    tr.setName(user.getPersonalDetail().getName());
+                    tr.setBody(tweet.getBody());
+                    tr.setDevice(tweet.getDevice());
+                    
+                    tweetList.add(tr);
+                }
+            }  
+        }             
         return tweetList;
     }
 
@@ -164,6 +214,21 @@ public class TimelineBean
     public void setTweetList(List<TweetRow> tweetList)
     {
         this.tweetList = tweetList;
+    }
+    
+    public String searchByBody() {
+        String outcome = null;
+        List<TweetRow> searchResults = new ArrayList<TweetRow>();
+        
+        // Validates Parameters
+        if (StringUtils.isBlank(getSearchCriteriaBody()))
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Please enter a text to search"));
+           
+        }        
+        outcome = Constants.OUTCOME_TIMELINE;
+       
+        return outcome;
     }
 
     public String saveTweet() {

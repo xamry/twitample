@@ -10,12 +10,11 @@
 
 	<ui:define name="content">	
 		<p:panel header="Your Timeline">
-
 			<table width="100%">
 				<tr>
 					<h:form>
 						<td><h:outputText value="Tweet: " /></td>
-						<td><p:inputTextarea rows="3" cols="80" counter="counter"
+						<td><p:inputTextarea rows="3" cols="70" counter="counter"
 							maxlength="100" counterTemplate="{0} characters remaining."
 							autoResize="false" value="#{timelineBean.tweetBody}" /><br />
 						<h:outputText id="counter" /></td>
@@ -23,7 +22,14 @@
 							action="#{timelineBean.saveTweet}" /></td>
 					</h:form>
 				</tr>
-
+				<tr><td>
+				<h:form>
+				<h:outputText value="Search by body: " />
+				<p:inputText value="#{timelineBean.searchCriteriaBody}" />
+				<h:commandButton value="Search"
+							action="#{timelineBean.searchByBody}" />
+				</h:form>
+				</td></tr>
 				<tr>
 					<table width="100%"><tr>					
 					<td style="align:center;">
