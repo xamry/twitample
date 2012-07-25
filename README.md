@@ -28,6 +28,10 @@ mvn clean install
 
 twitample.war will be created into target folder. Copy this to webapps folder under tomcat home.
 
+* Copy kundera-core-x.x.x.jar into lib folder under tomcat
+
+Kundera uses its own UserTransaction and UserTransactionFactory implementation for JTA. Thet are needed at server startup time. So copy this file into tomcat lib folder.
+
 * Start tomcat and hit below URL, and you are ready to go:
 
 ```
