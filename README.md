@@ -7,7 +7,7 @@ It demonstrates powerful JTA support in Kundera. All operations on database are 
 
 Pre-requisite:
 -------------------------
-1. Start cassandra and create column-families by running bellow commands on cassandra-cli:
+* Start cassandra and create column-families by running bellow commands on cassandra-cli:
 
 ```
 drop keyspace twitample;
@@ -20,15 +20,16 @@ create column family EXTERNAL_LINK with comparator=UTF8Type and default_validati
 describe twitample;
 ```
 
-2. Create war file of application by running below maven command:
+* Create war file of application by running below maven command:
 
 ```
 mvn clean install
 ```
 
-twitample.war will be created into target folder. Copy this to <tomcat directory>/webapps
+twitample.war will be created into target folder. Copy this to webapps folder under tomcat home.
 
-2. Start tomcat and hit below URL, and you are ready to go:
+* Start tomcat and hit below URL, and you are ready to go:
+
 ```
 http://<your host>:<port>/twitample/xhtml/login/login.jsf
 ```
