@@ -5,7 +5,7 @@ It uses Cassandra as backend for storing data and Kundera as a high-level client
 It demonstrates powerful JTA support in Kundera. All operations on database are JTA managed.  
 
 
-Pre-requisite:
+How to use:
 -------------------------
 * Start cassandra and create column-families by running bellow commands on cassandra-cli:
 
