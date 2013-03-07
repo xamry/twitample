@@ -180,7 +180,7 @@ public class TwitterService extends SuperDao implements Twitter
     @Override
     public List<Tweet> findTweetByBody(String tweetBody)
     {
-        Query q = em.createQuery("select u.tweets.body from User u where u.tweets.body like :body");
+        Query q = em.createQuery("select u.tweets.body from User u where u.tweets.body =:body");
         q.setParameter("body", tweetBody);
         List<Tweet> tweets = q.getResultList();
         return tweets;
@@ -189,7 +189,7 @@ public class TwitterService extends SuperDao implements Twitter
     @Override
     public List<Tweet> findTweetByDevice(String deviceName)
     {
-        Query q = em.createQuery("select u.tweets.device from User u where u.tweets.device like :device");
+        Query q = em.createQuery("select u.tweets.device from User u where u.tweets.device =:device");
         q.setParameter("device", deviceName);
         List<Tweet> tweets = q.getResultList();
         return tweets;
