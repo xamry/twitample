@@ -69,7 +69,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.impetus.client</groupId>
+<<<<<<< HEAD
 			<artifactId>kundera-neo4j</artifactId>
+=======
+			<artifactId>kundera-mongo</artifactId>
+>>>>>>> 24983200b53bb91c264fc2ddf8493209ab63e65b
 			<version>2.4-SNAPSHOT</version>
 		</dependency>
 

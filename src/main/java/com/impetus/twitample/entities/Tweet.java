@@ -18,6 +18,8 @@ package com.impetus.twitample.entities;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import com.impetus.kundera.index.Index;
+import com.impetus.kundera.index.IndexCollection;
 import com.impetus.twitample.TwitampleUtils;
 
 /**
@@ -27,6 +29,7 @@ import com.impetus.twitample.TwitampleUtils;
  */
 
 @Embeddable
+@IndexCollection(columns = { @Index(name = "body"), @Index(name = "device") })
 public class Tweet
 {
 

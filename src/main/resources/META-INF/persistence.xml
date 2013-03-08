@@ -3,7 +3,12 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
 	https://raw.github.com/impetus-opensource/Kundera/Kundera-2.0.4/kundera-core/src/test/resources/META-INF/persistence_2_0.xsd"
 	version="2.0">	
+<<<<<<< HEAD
 	<persistence-unit name="graph-browser-neo4j" transaction-type="JTA">
+=======
+<!-- 	<persistence-unit name="twitample_cassandra" transaction-type="JTA">
+ -->	<persistence-unit name="twitample_cassandra">
+>>>>>>> 24983200b53bb91c264fc2ddf8493209ab63e65b
 		<provider>com.impetus.kundera.KunderaPersistence</provider>
 		<class>com.impetus.kundera.graphbrowser.entities.Actor</class>
 		<class>com.impetus.kundera.graphbrowser.entities.Role</class>
@@ -28,13 +33,23 @@
 		<properties>
 			<property name="kundera.nodes" value="localhost" />
 			<property name="kundera.port" value="9160" />
+<<<<<<< HEAD
 			<property name="kundera.keyspace" value="imdb" />
 			<property name="kundera.dialect" value="cassandra" />			
+=======
+			<property name="kundera.keyspace" value="twitample" />
+			<property name="kundera.dialect" value="cassandra" />
+			<property name="kundera.ddl.auto.prepare" value="create" />
+>>>>>>> 24983200b53bb91c264fc2ddf8493209ab63e65b
 			<property name="kundera.client.lookup.class"
 				value="com.impetus.client.cassandra.thrift.ThriftClientFactory" />
 			<property name="kundera.cache.provider.class"
 				value="com.impetus.kundera.cache.ehcache.EhCacheProvider" />
 			<property name="kundera.cache.config.resource" value="/ehcache-test.xml" />
+<<<<<<< HEAD
+=======
+			<property name="kundera.client.property" value="kunderaTest.xml" />
+>>>>>>> 24983200b53bb91c264fc2ddf8493209ab63e65b
 		</properties>
 	</persistence-unit>
 

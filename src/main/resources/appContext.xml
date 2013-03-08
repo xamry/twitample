@@ -11,8 +11,9 @@
 	</bean>
 	
 	<!-- enables @Transactional annotations -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-
+	<!--  Uncomment it to enable Kundera JTA support -->
+<!-- 	<tx:annotation-driven transaction-manager="transactionManager" />
+ -->
 	<!-- Enable @PersistenceContext initialization -->
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
@@ -64,7 +65,8 @@
 		<property name="transactionAttribute" value="PROPAGATION_REQUIRED" />
 	</bean>
 
-	<tx:jta-transaction-manager />
+	<!--  Uncomment it to enable Kundera JTA support -->
+<!-- 	<tx:jta-transaction-manager />
 
 	<bean id="persistStore"
 		class="org.springframework.transaction.interceptor.TransactionInterceptor">
@@ -76,7 +78,7 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate"
+ -->	<bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate"
 		lazy-init="true">
 		<property name="environment">
 			<props>
@@ -86,11 +88,13 @@
 		</property>
 	</bean>
 
-	<bean id="transactionManager"
+	<!--  Uncomment it to enable Kundera JTA support -->
+
+<!-- 	<bean id="transactionManager"
 		class="org.springframework.transaction.jta.JtaTransactionManager">
 		<property name="userTransactionName" value="java:comp/UserTransaction" />
 		<property name="transactionSynchronizationName" value="SYNCHRONIZATION_ON_ACTUAL_TRANSACTION" />
 		<property name="jndiTemplate" ref="jndiTemplate" />
 	</bean>
-
+ -->
 </beans>
