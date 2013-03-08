@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	template="insertTemplate.xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+        Kundera Graph Browser :: Run Tests
+    </ui:define>
+
+	<ui:define name="content">
+		<h:form>
+		<table>
+			<tr>
+				<td><p:growl id="growl2" sticky="false" showDetail="false"/> </td>
+			</tr>
+		</table>
+		<br />
+		 <p:panel header="Insert Records">
+			
+				<table>			
+				
+					<tr>
+						<td><h:outputText value="Click on Submit to run CRUD and Queries:" /></td>
+						<td><p:commandButton value="Submit" update="growl2"   
+                            action="#{imdbBean.execute}"/> </td>
+					</tr>					
+				</table>
+				
+		</p:panel>
+		</h:form>	
+	</ui:define>
+</ui:composition>
+

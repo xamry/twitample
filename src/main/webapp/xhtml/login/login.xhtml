@@ -4,7 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="title">
-        Twitample :: Login
+        Kundera Graph Browser :: Login
     </ui:define>
 
 	<ui:define name="content">
@@ -15,31 +15,8 @@
 			</tr>
 		</table>
 		<br />
-		 <p:panel header="Login to Twitample">
-			<h:form>
-				<table>
-					<tr>
-						<td><h:outputText value="User Name:" /></td>
-						<td><p:inputText size="20" value="#{loginBean.userName}" /></td>
-					</tr>
-					<tr>
-						<td><h:outputText value="Password:" /></td>
-						<td><p:password size="20"
-							value="#{loginBean.password}" /></td>
-					</tr>
-					
-					<tr>						
-						<td colspan="2" align="right"><h:commandButton value="Submit"
-							action="#{loginBean.authenticate}" /></td>
-
-					</tr>
-					<tr>						
-						<td colspan="2" align="right">Not a member? <h:commandLink value="SignUp Now!"
-							action="/xhtml/register/signUp.xhtml" /></td>
-
-					</tr>
-				</table>
-			</h:form>
+		 <p:panel header="Login to Kundera Graph Browser">
+			
 		</p:panel>
 	</ui:define>
 </ui:composition>
